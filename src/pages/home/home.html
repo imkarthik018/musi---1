@@ -1,0 +1,307 @@
+<!-- Welcome Section -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Ease in !</h1>
+    <p class="text-gray-400">Here's what's happening in your world today</p>
+</div>
+
+<!-- Now Playing Card -->
+<div class="now-playing-card glass-card p-6 rounded-3xl mb-8 text-gray-100 hover:bg-gradient-to-br from-gray-900/50 to-gray-800/30 transition-all duration-300">
+    <h2 class="text-lg font-semibold text-white mb-4 flex items-center">
+        <i class="fas fa-music text-musi-accent mr-2"></i>
+        Now Playing
+        <span class="ml-auto text-sm text-musi-accent flex items-center">
+            <span class="w-2 h-2 rounded-full bg-musi-accent mr-2 animate-pulse"></span>
+            LIVE
+        </span>
+    </h2>
+    <div class="flex items-center space-x-6">
+        <div class="relative group">
+            <img src="savee images/passion.jpg" alt="Album Art" class="w-24 h-24 rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 rounded-2xl border-2 border-musi-accent/30 group-hover:border-musi-accent/50 transition-all duration-300"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300 flex items-center justify-center">
+                <button class="w-10 h-10 rounded-full bg-musi-accent text-black flex items-center justify-center transform hover:scale-110 transition-transform">
+                    <i class="fas fa-play text-sm"></i>
+                </button>
+            </div>
+        </div>
+        <div class="flex-1">
+            <h2 class="text-2xl font-bold text-white mb-1">Midnight City</h2>
+            <p class="text-gray-300 mb-4">M83 • Hurry Up, We're Dreaming</p>
+            
+            <!-- Progress Bar -->
+            <div class="mb-2">
+                <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-musi-accent to-musi-glitch-blue w-1/3 relative">
+                        <div class="absolute right-0 top-1/2 -mt-1 w-2 h-2 bg-white rounded-full transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                    <span>1:23</span>
+                    <span>3:45</span>
+                </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex items-center space-x-6 mt-4">
+                <button class="text-gray-300 hover:text-white transition-colors">
+                    <i class="fas fa-step-backward text-xl"></i>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-musi-accent text-black flex items-center justify-center hover:scale-110 transform transition-transform shadow-lg shadow-musi-accent/30">
+                    <i class="fas fa-play text-sm"></i>
+                </button>
+                <button class="text-gray-300 hover:text-white transition-colors">
+                    <i class="fas fa-step-forward text-xl"></i>
+                </button>
+                <div class="flex-1 flex justify-end space-x-4">
+                    <button class="text-gray-400 hover:text-white transition-colors">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white transition-colors">
+                        <i class="far fa-plus-square"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="mb-8">
+    <h2 class="text-xl font-semibold mb-4 flex items-center">
+        <i class="fas fa-bolt text-musi-accent mr-2"></i>
+        Quick Actions
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <button class="glass-card p-4 rounded-2xl text-left hover:bg-gradient-to-br from-musi-accent/10 to-musi-accent/5 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-musi-accent/20 to-musi-accent/10 flex items-center justify-center mb-3 group-hover:bg-gradient-to-br group-hover:from-musi-accent/30 group-hover:to-musi-accent/20">
+                <i class="fas fa-play text-musi-accent"></i>
+            </div>
+            <h3 class="font-medium text-white">Resume Playback</h3>
+            <p class="text-xs text-gray-400">Continue where you left off</p>
+        </button>
+        <button class="glass-card p-4 rounded-2xl text-left hover:bg-gradient-to-br from-purple-500/10 to-musi-accent/5 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center mb-3 group-hover:bg-gradient-to-br group-hover:from-purple-500/30 group-hover:to-purple-500/20">
+                <i class="fas fa-random text-purple-400"></i>
+            </div>
+            <h3 class="font-medium text-white">Shuffle Favorites</h3>
+            <p class="text-xs text-gray-400">Mix of your liked songs</p>
+        </button>
+        <button class="glass-card p-4 rounded-2xl text-left hover:bg-gradient-to-br from-blue-500/10 to-blue-500/5 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-gradient-to-br group-hover:from-blue-500/30 group-hover:to-blue-500/20">
+                <i class="fas fa-moon text-blue-400"></i>
+            </div>
+            <h3 class="font-medium text-white">Chill Mix</h3>
+            <p class="text-xs text-gray-400">Relaxing beats for focus</p>
+        </button>
+        <button class="glass-card p-4 rounded-2xl text-left hover:bg-gradient-to-br from-red-500/10 to-red-500/5 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-red-500/10 flex items-center justify-center mb-3 group-hover:bg-gradient-to-br group-hover:from-red-500/30 group-hover:to-red-500/20">
+                <i class="fas fa-fire text-red-400"></i>
+            </div>
+            <h3 class="font-medium text-white">Energy Boost</h3>
+            <p class="text-xs text-gray-400">High energy workout mix</p>
+        </button>
+    </div>
+</div>
+
+<!-- Recently Played -->
+<div class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold flex items-center">
+            <i class="fas fa-clock text-musi-accent mr-2"></i>
+            Recently Played
+        </h2>
+        <button class="text-sm text-gray-400 hover:text-white flex items-center">
+            See all <i class="fas fa-chevron-right ml-1 text-xs"></i>
+        </button>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Recently Played Item 1 -->
+        <div class="group">
+            <div class="relative mb-3 rounded-xl overflow-hidden aspect-square">
+                <img src="savee images/The Weeknd ! ☆彡.jpg" alt="Album" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <button class="absolute bottom-2 right-2 w-10 h-10 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    <i class="fas fa-play text-sm"></i>
+                </button>
+            </div>
+            <h3 class="font-medium text-white truncate">Chill Vibes</h3>
+            <p class="text-sm text-gray-400 truncate">Your daily mix of chill beats</p>
+        </div>
+        <!-- More recently played items... -->
+    </div>
+</div>
+
+<!-- Made For You -->
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+        <i class="fas fa-heart text-musi-accent mr-3"></i>
+        Made For You
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Top Mixes Card -->
+        <div class="glass-card p-5 rounded-2xl group hover:bg-gradient-to-br hover:from-musi-accent/5 hover:to-musi-glitch-blue/5 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Your Top Mixes</h3>
+                    <p class="text-sm text-gray-400">Made for your taste</p>
+                </div>
+                <button class="text-gray-400 hover:text-white p-2 -mr-2">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Mix 1 -->
+                <div class="group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:to-pink-500/10 p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+                    <div class="relative overflow-hidden rounded-lg mb-3">
+                        <img src="savee images/download (3).jpg" alt="Indie Mix" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute bottom-2 right-2 w-8 h-8 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-play text-xs"></i>
+                        </button>
+                    </div>
+                    <h4 class="text-sm font-medium text-white truncate">Indie Mix</h4>
+                    <p class="text-xs text-gray-400 truncate">The Neighbourhood, Tame Impala</p>
+                </div>
+                
+                <!-- Mix 2 -->
+                <div class="group-hover:bg-gradient-to-br group-hover:from-blue-500/10 group-hover:to-cyan-500/10 p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+                    <div class="relative overflow-hidden rounded-lg mb-3">
+                        <img src="savee images/overthink.jpg" alt="Electronic Mix" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute bottom-2 right-2 w-8 h-8 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-play text-xs"></i>
+                        </button>
+                    </div>
+                    <h4 class="text-sm font-medium text-white truncate">Focus Flow</h4>
+                    <p class="text-xs text-gray-400 truncate">Lo-fi beats to study to</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Jump Back In Card -->
+        <div class="glass-card p-5 rounded-2xl group hover:bg-gradient-to-br hover:from-musi-accent/5 hover:to-musi-glitch-blue/5 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-1">Jump Back In</h3>
+                    <p class="text-sm text-gray-400">Pick up where you left off</p>
+                </div>
+                <button class="text-gray-400 hover:text-white p-2 -mr-2">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <!-- Item 1 -->
+                <div class="flex items-center space-x-4 p-3 rounded-xl bg-gradient-to-r from-musi-accent/5 to-musi-glitch-blue/5 hover:bg-gradient-to-r hover:from-musi-accent/10 hover:to-musi-glitch-blue/10 transition-all duration-300 cursor-pointer group/item">
+                    <div class="relative flex-shrink-0">
+                        <img src="savee images/download (4).jpg" alt="Album Art" class="w-16 h-16 rounded-xl object-cover shadow-lg group-hover/item:scale-105 transition-transform duration-300">
+                        <button class="absolute -bottom-1 -right-1 w-6 h-6 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover/item:opacity-100 transform translate-y-2 group-hover/item:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-play text-xs"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-semibold text-white truncate">Daily Mix 1</h4>
+                        <p class="text-xs text-gray-400 mb-1.5">Made for you • 45 min left</p>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5 mb-1">
+                            <div class="bg-gradient-to-r from-musi-accent to-musi-glitch-blue h-1.5 rounded-full transition-all duration-500" style="width: 75%">
+                                <div class="w-2 h-2 bg-white rounded-full -mt-0.5 -mr-1 float-right opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-500">
+                            <span>12:45</span>
+                            <span>16:30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-center space-x-4 p-3 rounded-xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 transition-all duration-300 cursor-pointer group/item">
+                    <div class="relative flex-shrink-0">
+                        <img src="savee images/download (1).jpg" alt="Album Art" class="w-16 h-16 rounded-xl object-cover shadow-lg group-hover/item:scale-105 transition-transform duration-300">
+                        <button class="absolute -bottom-1 -right-1 w-6 h-6 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover/item:opacity-100 transform translate-y-2 group-hover/item:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-play text-xs"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-semibold text-white truncate">Chill Vibes</h4>
+                        <p class="text-xs text-gray-400 mb-1.5">Your favorite relaxing tracks • 1h 22m left</p>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5 mb-1">
+                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-1.5 rounded-full transition-all duration-500" style="width: 45%">
+                                <div class="w-2 h-2 bg-white rounded-full -mt-0.5 -mr-1 float-right opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-500">
+                            <span>22:15</span>
+                            <span>48:30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-center space-x-4 p-3 rounded-xl bg-gradient-to-r from-blue-500/5 to-cyan-500/5 hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-cyan-500/10 transition-all duration-300 cursor-pointer group/item">
+                    <div class="relative flex-shrink-0">
+                        <img src="savee images/Observe.jpg" alt="Album Art" class="w-16 h-16 rounded-xl object-cover shadow-lg group-hover/item:scale-105 transition-transform duration-300">
+                        <button class="absolute -bottom-1 -right-1 w-6 h-6 bg-musi-accent text-black rounded-full flex items-center justify-center opacity-0 group-hover/item:opacity-100 transform translate-y-2 group-hover/item:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-play text-xs"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-semibold text-white truncate">Workout Mix</h4>
+                        <p class="text-xs text-gray-400 mb-1.5">High energy • 18 min left</p>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5 mb-1">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-1.5 rounded-full transition-all duration-500" style="width: 85%">
+                                <div class="w-2 h-2 bg-white rounded-full -mt-0.5 -mr-1 float-right opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-500">
+                            <span>8:30</span>
+                            <span>10:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Smart Suggestions -->
+<div class="mb-8">
+    <h2 class="text-xl font-semibold mb-4 flex items-center">
+        <i class="fas fa-lightbulb text-musi-accent mr-2"></i>
+        Smart Suggestions
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="glass-card p-5 rounded-2xl group hover:bg-gradient-to-br from-musi-accent/5 to-transparent transition-all duration-300">
+            <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-musi-accent/20 to-musi-accent/10 flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-headphones text-musi-accent"></i>
+                </div>
+                <div>
+                    <h3 class="font-medium text-white mb-1">Because you listened to Lo-fi Chill</h3>
+                    <p class="text-sm text-gray-400">Discover more relaxing beats</p>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card p-5 rounded-2xl group hover:bg-gradient-to-br from-purple-500/5 to-transparent transition-all duration-300">
+            <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-compact-disc text-purple-400"></i>
+                </div>
+                <div>
+                    <h3 class="font-medium text-white mb-1">New Releases For You</h3>
+                    <p class="text-sm text-gray-400">Albums and singles you might like</p>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card p-5 rounded-2xl group hover:bg-gradient-to-br from-blue-500/5 to-transparent transition-all duration-300">
+            <div class="flex items-start">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-chart-line text-blue-400"></i>
+                </div>
+                <div>
+                    <h3 class="font-medium text-white mb-1">Trending in Your Area</h3>
+                    <p class="text-sm text-gray-400">See what's popular near you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

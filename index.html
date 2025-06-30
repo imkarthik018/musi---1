@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musi - Modern Music Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans min-h-screen overflow-x-hidden">
+    <!-- Floating Top Navbar -->
+    <nav class="top-navbar">
+        <div class="nav-container">
+            <h1 class="logo glitch" data-text="MUSI">MUSI</h1>
+            <div class="nav-items">
+                <a href="#" class="nav-item active" data-tab="home-content" data-tooltip="Home">
+                    <i class="fas fa-th-large"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="explore-content" data-tooltip="Explore">
+                    <i class="fas fa-atom"></i>
+                    <span class="nav-tooltip">Explore</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="library-content" data-tooltip="Library">
+                    <i class="fas fa-book-open"></i>
+                    <span class="nav-tooltip">Library</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="profile-content" data-tooltip="Profile">
+                    <i class="fas fa-user-astronaut"></i>
+                    <span class="nav-tooltip">Profile</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-32 pb-24">
+        <!-- Home Content (default visible) -->
+        <div id="home-content" class="content-section active">
+            <div id="pre-auth-content" class="flex flex-col items-center justify-center h-96">
+                <h2 class="text-4xl font-bold text-white mb-6">Welcome to Musi</h2>
+                <p class="text-gray-400 mb-8">Log in to discover and play your favorite music.</p>
+                <button id="spotify-login-button" class="px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition-colors flex items-center space-x-3">
+                    <i class="fab fa-spotify text-xl"></i>
+                    <span>Login with Spotify</span>
+                </button>
+            </div>
+            <div id="authenticated-content" class="hidden">
+                <!-- Carousels will be loaded here -->
+                <div id="featured-playlists-carousel"></div>
+                <div id="new-releases-carousel" class="mt-8"></div>
+            </div>
+        </div>
+
+        <!-- Explore Content (hidden by default) -->
+        <div id="explore-content" class="content-section hidden">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Explore</h1>
+                <p class="text-gray-400">Discover new music and playlists</p>
+            </div>
+            <!-- Add explore content here -->
+            <div class="glass-card p-8 rounded-3xl text-center">
+                <i class="fas fa-compass text-5xl text-gray-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-white mb-2">Discover New Music</h2>
+                <p class="text-gray-400 mb-6">Browse through our curated collections and find your next favorite song</p>
+                <button class="px-6 py-2 bg-musi-accent text-black rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                    Browse Genres
+                </button>
+            </div>
+        </div>
+
+        <!-- Library Content (hidden by default) -->
+        <div id="library-content" class="content-section hidden">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Your Library</h1>
+                <p class="text-gray-400">Your personal collection of music and playlists</p>
+            </div>
+            <!-- Add library content here -->
+            <div class="glass-card p-8 rounded-3xl text-center">
+                <i class="fas fa-music text-5xl text-gray-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-white mb-2">Your Music Collection</h2>
+                <p class="text-gray-400 mb-6">All your saved songs, albums, and playlists in one place</p>
+                <button class="px-6 py-2 bg-musi-accent text-black rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                    View All Tracks
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Content (hidden by default) -->
+        <div id="profile-content" class="content-section hidden">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Your Profile</h1>
+                <p class="text-gray-400">Manage your account and preferences</p>
+            </div>
+            <!-- Add profile content here -->
+            <div class="glass-card p-8 rounded-3xl text-center">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-musi-accent/20 to-musi-glitch-blue/20 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-user text-3xl text-musi-accent"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-2">Welcome Back</h2>
+                <p class="text-gray-400 mb-6">View and edit your profile information</p>
+                <button class="px-6 py-2 bg-musi-accent text-black rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                    Edit Profile
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Now Playing Bar (initially hidden) -->
+    <div id="floating-now-playing" class="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/50 transform translate-y-full transition-all duration-300 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="savee images/passion.jpg" alt="Album" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-white">Midnight City</h4>
+                        <p class="text-xs text-gray-400">M83 • Hurry Up, We're Dreaming</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="w-10 h-10 rounded-full bg-musi-accent text-black flex items-center justify-center hover:scale-110 transform transition-transform">
+                        <i class="fas fa-play text-sm"></i>
+                    </button>
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <div class="w-64 mx-4">
+                        <div class="h-1 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-musi-accent to-musi-glitch-blue w-1/3"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                            <span>1:23</span>
+                            <span>3:45</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="text-gray-400 hover:text-white">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/js/spotifyAuth.js"></script>
+    <script type="module" src="src/js/spotifyApi.js"></script>
+    <script type="module" src="src/js/carousel.js"></script>
+    <script type="module" src="src/js/main.js"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+</body>
+</html>
