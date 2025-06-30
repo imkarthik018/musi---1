@@ -1,9 +1,11 @@
+
 import { spotifyAuth } from './spotifyAuth.js';
 import { spotifyApi } from './spotifyApi.js';
 import { createCarousel } from './carousel.js';
 
 let spotifyPlayer = null;
 let deviceId = null;
+let isPremiumUser = false;
 
 // Global UI elements (declared here to be accessible by SDK callbacks)
 let floatingNowPlaying;
@@ -44,72 +46,99 @@ const loadAuthenticatedContent = async () => {
     if (preAuthContent) preAuthContent.classList.add('hidden');
     if (authenticatedContent) authenticatedContent.classList.remove('hidden');
 
+    const userProfile = await spotifyApi.getUserProfile();
+    if (userProfile && userProfile.product) {
+        isPremiumUser = (userProfile.product === 'premium');
+        console.log('main.js: User product type:', userProfile.product, ', isPremiumUser:', isPremiumUser);
+    }
+
+    if (!isPremiumUser) {
+        authenticatedContent.innerHTML = `
+            <div class="text-center py-10">
+                <h2 class="text-3xl font-bold text-red-400 mb-4">Premium Account Required</h2>
+                <p class="text-gray-400 mb-6">Spotify playback and some content features are restricted to Premium users.</p>
+                <p class="text-gray-400">Please upgrade your Spotify account to enjoy full functionality.</p>
+            </div>
+        `;
+        // Disable play buttons and SDK initialization for free users
+        if (playPauseButton) playPauseButton.style.display = 'none';
+        if (prevButton) prevButton.style.display = 'none';
+        if (nextButton) nextButton.style.display = 'none';
+        return;
+    }
+
     // Fetch and display featured playlists
     const featuredPlaylistsData = await spotifyApi.getFeaturedPlaylists();
     if (featuredPlaylistsData && featuredPlaylistsData.playlists && featuredPlaylistsData.playlists.items) {
         createCarousel('featured-playlists-carousel', 'Featured Playlists', featuredPlaylistsData.playlists.items);
+    } else {
+        console.warn('main.js: Could not fetch featured playlists.', featuredPlaylistsData);
+        // Optionally display a message or fallback content
     }
 
     // Fetch and display new releases
     const newReleasesData = await spotifyApi.getNewReleases();
     if (newReleasesData && newReleasesData.albums && newReleasesData.albums.items) {
         createCarousel('new-releases-carousel', 'New Releases', newReleasesData.albums.items);
-    }
-};
-
-// Spotify Web Playback SDK Initialization
-window.onSpotifyWebPlaybackSDKReady = () => {
-    console.log('main.js: Spotify Web Playback SDK is ready.');
-    const token = spotifyAuth.getAccessToken();
-    if (!token) {
-        console.error('Spotify Web Playback SDK: No access token.');
-        return;
+    } else {
+        console.warn('main.js: Could not fetch new releases.', newReleasesData);
+        // Optionally display a message or fallback content
     }
 
-    spotifyPlayer = new Spotify.Player({
-        name: 'Musi Web Player',
-        getOAuthToken: cb => { cb(token); },
-        volume: 0.5
-    });
-
-    // Ready
-    spotifyPlayer.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-        deviceId = device_id;
-        // Transfer playback to this device
-        spotifyApi.transferPlayback(deviceId);
-    });
-
-    // Not Ready
-    spotifyPlayer.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-    });
-
-    // Error handling
-    spotifyPlayer.addListener('initialization_error', ({ message }) => {
-        console.error(message);
-    });
-    spotifyPlayer.addListener('authentication_error', ({ message }) => {
-        console.error(message);
-        spotifyAuth.clearTokens(); // Clear tokens if authentication fails
-    });
-    spotifyPlayer.addListener('account_error', ({ message }) => {
-        console.error(message);
-    });
-    spotifyPlayer.addListener('playback_error', ({ message }) => {
-        console.error(message);
-    });
-
-    // Playback status updates
-    spotifyPlayer.addListener('player_state_changed', state => {
-        if (!state) {
+    // Initialize Spotify Web Playback SDK only for premium users
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        console.log('main.js: Spotify Web Playback SDK is ready.');
+        const token = spotifyAuth.getAccessToken();
+        if (!token) {
+            console.error('Spotify Web Playback SDK: No access token.');
             return;
         }
-        updateNowPlayingUI(state.track_window.current_track);
-    });
 
-    // Connect to the player!
-    spotifyPlayer.connect();
+        spotifyPlayer = new Spotify.Player({
+            name: 'Musi Web Player',
+            getOAuthToken: cb => { cb(token); },
+            volume: 0.5
+        });
+
+        // Ready
+        spotifyPlayer.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+            deviceId = device_id;
+            // Transfer playback to this device
+            spotifyApi.transferPlayback(deviceId);
+        });
+
+        // Not Ready
+        spotifyPlayer.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+        });
+
+        // Error handling
+        spotifyPlayer.addListener('initialization_error', ({ message }) => {
+            console.error(message);
+        });
+        spotifyPlayer.addListener('authentication_error', ({ message }) => {
+            console.error(message);
+            spotifyAuth.clearTokens(); // Clear tokens if authentication fails
+        });
+        spotifyPlayer.addListener('account_error', ({ message }) => {
+            console.error(message);
+        });
+        spotifyPlayer.addListener('playback_error', ({ message }) => {
+            console.error(message);
+        });
+
+        // Playback status updates
+        spotifyPlayer.addListener('player_state_changed', state => {
+            if (!state) {
+                return;
+            }
+            updateNowPlayingUI(state.track_window.current_track);
+        });
+
+        // Connect to the player!
+        spotifyPlayer.connect();
+    };
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -293,8 +322,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Spotify Login Integration
     const spotifyLoginButton = document.getElementById('spotify-login-button');
-    const preAuthContent = document.getElementById('pre-auth-content');
-    const authenticatedContent = document.getElementById('authenticated-content');
 
     console.log('main.js: spotifyLoginButton element:', spotifyLoginButton);
 

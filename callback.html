@@ -15,8 +15,8 @@
             <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-musi-accent mx-auto"></div>
         </div>
     </div>
-    <script type="module" src="src/js/spotifyAuth.js"></script>
-    <script>
+    <script type="module">
+        import { spotifyAuth } from './src/js/spotifyAuth.js';
         document.addEventListener('DOMContentLoaded', () => {
             spotifyAuth.handleCallback();
         });
