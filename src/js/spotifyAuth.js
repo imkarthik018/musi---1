@@ -21,9 +21,33 @@ const SCOPES = [
     'user-read-recently-played'
 ];
 
+// PKCE functions
+function generateCodeVerifier(length) {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+async function generateCodeChallenge(codeVerifier) {
+    const data = new TextEncoder().encode(codeVerifier);
+    const digest = await window.crypto.subtle.digest('SHA-256', data);
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+}
+
 const spotifyAuth = {
-    login: () => {
-        const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join('%20')}`;
+    login: async () => {
+        const codeVerifier = generateCodeVerifier(128);
+        const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+        localStorage.setItem('code_verifier', codeVerifier);
+
+        const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join('%20')}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
         window.location.href = authUrl;
     },
 
@@ -31,21 +55,23 @@ const spotifyAuth = {
         console.log('spotifyAuth.js: handleCallback called.');
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
+        const codeVerifier = localStorage.getItem('code_verifier');
         console.log('spotifyAuth.js: Authorization code received:', code);
 
-        if (code) {
+        if (code && codeVerifier) {
             try {
                 console.log('spotifyAuth.js: Attempting to exchange code for tokens...');
                 const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + '998328ae269d440fb18b6e276819e2dc')
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: new URLSearchParams({
                         grant_type: 'authorization_code',
                         code: code,
-                        redirect_uri: REDIRECT_URI
+                        redirect_uri: REDIRECT_URI,
+                        client_id: CLIENT_ID, // Include client_id for PKCE
+                        code_verifier: codeVerifier
                     })
                 });
 
@@ -57,6 +83,7 @@ const spotifyAuth = {
                 const data = await tokenResponse.json();
                 console.log('spotifyAuth.js: Tokens received:', data);
                 spotifyAuth.saveTokens(data.access_token, data.refresh_token, data.expires_in);
+                localStorage.removeItem('code_verifier'); // Clean up code_verifier
                 console.log('spotifyAuth.js: Tokens saved. Redirecting to home page...');
                 window.location.href = '/'; // Redirect to home page
             } catch (error) {
@@ -65,8 +92,8 @@ const spotifyAuth = {
                 window.location.href = '/?error=auth_failed';
             }
         } else {
-            console.error('spotifyAuth.js: No authorization code found in URL.');
-            window.location.href = '/?error=no_code';
+            console.error('spotifyAuth.js: No authorization code or code_verifier found.');
+            window.location.href = '/?error=no_code_or_verifier';
         }
     },
 
@@ -112,12 +139,12 @@ const spotifyAuth = {
             const refreshResponse = await fetch('https://accounts.spotify.com/api/token', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + '998328ae269d440fb18b6e276819e2dc')
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
                     grant_type: 'refresh_token',
-                    refresh_token: refreshToken
+                    refresh_token: refreshToken,
+                    client_id: CLIENT_ID // Include client_id for refresh token request
                 })
             });
 

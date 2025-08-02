@@ -68,6 +68,23 @@ const spotifyApi = {
         return spotifyApi._fetch(`/browse/new-releases?limit=${limit}&offset=${offset}`);
     },
 
+    getUserTopItems: async (type = 'tracks', limit = 6, offset = 0) => {
+        return spotifyApi._fetch(`/me/top/${type}?limit=${limit}&offset=${offset}`);
+    },
+
+    getRecentlyPlayed: async (limit = 6) => {
+        return spotifyApi._fetch(`/me/player/recently-played?limit=${limit}`);
+    },
+
+    getRecommendations: async (seed_artists, seed_tracks, limit = 6) => {
+        const seedParams = new URLSearchParams({
+            seed_artists: seed_artists.join(','),
+            seed_tracks: seed_tracks.join(','),
+            limit: limit
+        });
+        return spotifyApi._fetch(`/recommendations?${seedParams.toString()}`);
+    },
+
     getUserPlaylists: async (limit = 6, offset = 0) => {
         return spotifyApi._fetch(`/me/playlists?limit=${limit}&offset=${offset}`);
     },
@@ -81,10 +98,16 @@ const spotifyApi = {
     },
 
     // Playback control functions (requires 'streaming' scope and Web Playback SDK)
-    playTrack: async (deviceId, trackUri) => {
-        return spotifyApi._fetch(`/me/player/play?device_id=${deviceId}`, 'PUT', {
-            uris: [trackUri]
-        });
+    startPlayback: async (deviceId, uri) => {
+        const body = {};
+        if (uri.includes(':track:')) {
+            // For a single track, we send it in the `uris` array
+            body.uris = [uri];
+        } else {
+            // For an album or playlist, we send it as a `context_uri`
+            body.context_uri = uri;
+        }
+        return spotifyApi._fetch(`/me/player/play?device_id=${deviceId}`, 'PUT', body);
     },
 
     pausePlayback: async (deviceId) => {
