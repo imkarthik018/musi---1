@@ -861,13 +861,13 @@ main {
 
 /* Animated AI Bot */
 .ai-bot {
-  scale: 1.25;
+  scale: 0.9;
   width: 34px;
   aspect-ratio: 1;
   position: relative;
   display: grid;
   place-items: center;
-  animation: blink 2.4s ease infinite, move-head 4.2s ease infinite, mouth 1.2s ease-in infinite;
+  animation: blink 2.4s ease infinite, move-head 6s ease infinite, mouth 1.2s ease-in infinite, music-pulse 2s ease-in-out infinite, bot-glitch 8s infinite;
 }
 
 .ai-bot .head {
@@ -937,11 +937,11 @@ main {
   filter: drop-shadow(0 0 2px #9ae3dc);
   background: repeating-linear-gradient(to bottom, white, white 0.25px, transparent 0.25px, transparent 0.6px), linear-gradient(to bottom, magenta, transparent 60%), #9ae3dc;
   border-radius: 1px;
-  animation: eye-blink 2.4s ease infinite;
+  animation: eye-blink 2.4s ease infinite, music-equalizer 1.5s ease-in-out infinite;
 }
 
 .ai-bot .eyes::after {
-  animation: eye-blink-right 2.4s ease infinite;
+  animation: eye-blink-right 2.4s ease infinite, music-equalizer 1.5s ease-in-out infinite reverse;
 }
 
 .ai-bot .mouth {
@@ -950,7 +950,7 @@ main {
   background: #9ae3dc;
   border-radius: 0 0 1px 1px;
   filter: drop-shadow(0 0 2px #9ae3dc);
-  animation: mouth-move 1.2s ease-in infinite;
+  animation: mouth-move 1.2s ease-in infinite, music-beat 0.8s ease-in-out infinite;
 }
 
 @keyframes blink {
@@ -1000,10 +1000,10 @@ main {
     transform: translateX(0);
   }
   10% {
-    transform: translateX(20%);
+    transform: translateX(8%);
   }
   30% {
-    transform: translateX(-20%);
+    transform: translateX(-8%);
   }
 }
 
@@ -1012,10 +1012,10 @@ main {
     transform: translateX(0);
   }
   10% {
-    transform: translateX(10%);
+    transform: translateX(4%);
   }
   30% {
-    transform: translateX(-10%);
+    transform: translateX(-4%);
   }
 }
 
@@ -1040,5 +1040,101 @@ main {
   }
   30% {
     transform: scaleX(1.5);
+  }
+}
+
+/* Musical Animations */
+@keyframes music-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes music-equalizer {
+  0%, 100% {
+    height: 8px;
+    filter: drop-shadow(0 0 2px #9ae3dc);
+  }
+  25% {
+    height: 6px;
+    filter: drop-shadow(0 0 4px #9ae3dc);
+  }
+  50% {
+    height: 10px;
+    filter: drop-shadow(0 0 6px #9ae3dc);
+  }
+  75% {
+    height: 7px;
+    filter: drop-shadow(0 0 3px #9ae3dc);
+  }
+}
+
+@keyframes music-beat {
+  0%, 100% {
+    width: 10px;
+    filter: drop-shadow(0 0 2px #9ae3dc);
+  }
+  50% {
+    width: 12px;
+    filter: drop-shadow(0 0 4px #9ae3dc);
+  }
+}
+
+/* Bot Glitch Effect */
+@keyframes bot-glitch {
+  0%, 100% { 
+    transform: translate(0);
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.5));
+  }
+  1% { 
+    transform: translate(-1px, 1px);
+    filter: drop-shadow(0 0 2px rgba(255, 59, 59, 0.8));
+  }
+  2% { 
+    transform: translate(1px, -1px);
+    filter: drop-shadow(0 0 2px rgba(107, 107, 255, 0.8));
+  }
+  3% { 
+    transform: translate(-1px, -1px);
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.6));
+  }
+  4% { 
+    transform: translate(1px, 1px);
+    filter: drop-shadow(0 0 2px rgba(255, 59, 59, 0.7));
+  }
+  5% { 
+    transform: translate(-1px, 1px);
+    filter: drop-shadow(0 0 2px rgba(107, 107, 255, 0.9));
+  }
+  6% { 
+    transform: translate(1px, -1px);
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.5));
+  }
+  7% { 
+    transform: translate(-1px, -1px);
+    filter: drop-shadow(0 0 2px rgba(255, 59, 59, 0.6));
+  }
+  8% { 
+    transform: translate(1px, 1px);
+    filter: drop-shadow(0 0 2px rgba(107, 107, 255, 0.8));
+  }
+  9% { 
+    transform: translate(-1px, 1px);
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.7));
+  }
+  10% { 
+    transform: translate(0);
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.5));
+  }
+  90% { 
+    filter: drop-shadow(0 0 2px rgba(182, 107, 255, 0.5));
+  }
+  95% { 
+    filter: drop-shadow(0 0 10px rgba(182, 107, 255, 0.8), 0 0 20px rgba(182, 107, 255, 0.6), 0 0 30px rgba(182, 107, 255, 0.4));
   }
 }
