@@ -42,6 +42,12 @@ body {
     justify-content: space-between;
 }
 
+/* Ensure main content respects navbar space */
+main {
+    padding-top: 0;
+    margin-top: 0;
+}
+
 /* Navigation Container */
 .nav-container {
     width: 100%;
@@ -611,28 +617,60 @@ main {
     }
 }
 
+/* Static Page Styles */
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
 /* Hero Video Styles */
 #pre-auth-content {
-    min-height: 100vh;
-    padding-top: 120px;
-    padding-bottom: 80px;
+    height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    padding-top: 40px; /* Minimal padding to keep container close to navbar */
+    box-sizing: border-box;
+    margin-top: -128px; /* Compensate for padding on main element */
 }
 
-/* Ensure perfect 50/50 split */
-#pre-auth-content > div {
-    flex: 1;
+/* Glassmorphic Container */
+#pre-auth-content .glass-card {
+    background: rgba(20, 20, 25, 0.7);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(182, 107, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* Enhanced Spotify login button */
+#pre-auth-content .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(182, 107, 255, 0.15);
+}
+
+/* Premium Spotify login button with liquid effects and violet theme */
 #spotify-login-button {
-    background: linear-gradient(135deg, #b66bff 0%, #6b6bff 100%);
+    background: linear-gradient(135deg, #b66bff 0%, #8a2be2 50%, #6b6bff 100%);
     border: none;
     position: relative;
     overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 6px 20px rgba(2, 1, 2, 0.4),
+        0 0 0 1px rgba(182, 107, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* Liquid shimmer effect */
 #spotify-login-button::before {
     content: '';
     position: absolute;
@@ -640,16 +678,169 @@ main {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: left 0.8s ease;
+    z-index: 1;
+}
+
+/* Liquid flow effect */
+#spotify-login-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0deg,
+        rgba(159, 102, 215, 0.15) 60deg,
+        transparent 120deg,
+        rgba(144, 61, 223, 0.15) 180deg,
+        transparent 240deg,
+        rgba(107, 107, 255, 0.15) 300deg,
+        transparent 360deg
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: liquid-rotate 4s linear infinite;
+    z-index: 0;
+}
+
+/* Premium neon glow border */
+#spotify-login-button .neon-border {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #b66bff, #8a2be2, #6b6bff, #b66bff);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    filter: blur(10px);
+}
+
+#spotify-login-button:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 
+        0 15px 45px rgba(0, 0, 0, 0.7),
+        0 0 0 3px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(128, 0, 255, 0.4),
+        0 0 60px rgba(182, 107, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+    background: linear-gradient(135deg, #b66bff 0%, #8a2be2 50%, #6b6bff 100%);
 }
 
 #spotify-login-button:hover::before {
     left: 100%;
 }
 
-#spotify-login-button:hover {
-    box-shadow: 0 8px 25px rgba(182, 107, 255, 0.4);
+#spotify-login-button:hover::after {
+    opacity: 0.9;
+    animation: liquid-rotate 3s linear infinite;
+}
+
+#spotify-login-button:hover .neon-border {
+    opacity: 1;
+    animation: neon-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes liquid-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes neon-pulse {
+    0%, 100% { 
+        opacity: 0.9;
+        filter: blur(10px);
+    }
+    50% { 
+        opacity: 1;
+        filter: blur(15px);
+    }
+}
+
+/* Premium glassmorphic effect */
+#spotify-login-button {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Subtle floating animations */
+#pre-auth-content .glass-card {
+    animation: subtle-float 8s ease-in-out infinite;
+}
+
+/* Welcome content floating effect */
+#pre-auth-content .glass-card > div:first-child {
+    animation: welcome-float 10s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+/* Video container floating effect */
+#pre-auth-content .glass-card > div:last-child {
+    animation: video-float 12s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes subtle-float {
+    0% { 
+        transform: translateY(0px) translateX(0px);
+    }
+    25% { 
+        transform: translateY(-8px) translateX(-4px);
+    }
+    50% { 
+        transform: translateY(-4px) translateX(0px);
+    }
+    75% { 
+        transform: translateY(-8px) translateX(4px);
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px);
+    }
+}
+
+@keyframes welcome-float {
+    0% { 
+        transform: translateY(0px) translateX(0px);
+    }
+    25% { 
+        transform: translateY(-6px) translateX(-3px);
+    }
+    50% { 
+        transform: translateY(-3px) translateX(0px);
+    }
+    75% { 
+        transform: translateY(-6px) translateX(3px);
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px);
+    }
+}
+
+@keyframes video-float {
+    0% { 
+        transform: translateY(0px) translateX(0px);
+    }
+    25% { 
+        transform: translateY(-5px) translateX(-2px);
+    }
+    50% { 
+        transform: translateY(-2px) translateX(0px);
+    }
+    75% { 
+        transform: translateY(-5px) translateX(2px);
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px);
+    }
 }
 
 /* Video container organization */
