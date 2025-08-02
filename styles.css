@@ -10,6 +10,128 @@ body {
     background-color: #0a0a0a;
 }
 
+/* Premium Welcome Text with Clima Crisis Font */
+.premium-welcome-text {
+    font-family: 'Clima Crisis', 'Orbitron', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f6f6f6 50%, #4b02b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 
+        0 0 30px rgba(0, 0, 0, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.2),
+        0 0 90px rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+
+
+.premium-musi-text {
+    font-family: 'Clima Crisis', 'Orbitron', sans-serif;
+    font-weight: 700;
+    position: relative;
+    color: #b66bff; /* Fallback color */
+    -webkit-text-fill-color: #b66bff; /* Override parent transparency */
+    background: none; /* Clear inherited background */
+    animation: violet-glow 4s ease-in-out infinite alternate; /* Use new violet glow animation */
+}
+
+/* Keyframes for black border and light violet glow effect */
+@keyframes violet-glow {
+    0%, 100% {
+        text-shadow:
+            /* Black Border */
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000,
+            /* Light Violet Glow */
+             0 0 5px rgba(0, 0, 0, 0.5),
+             0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        text-shadow:
+            /* Black Border */
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000,
+            /* Light Violet Glow */
+             0 0 10px rgba(0, 0, 0, 0.7),
+             0 0 20px rgba(36, 35, 37, 0.5),
+             0 0 30px rgba(200, 160, 255, 0.3);
+    }
+}
+
+.premium-musi-text::before,
+.premium-musi-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.premium-musi-text::before {
+    color: #6b6bff; /* Glitch color from your theme */
+    left: 2px;
+    text-shadow: -1px 0 #ff3b3b;
+    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+.premium-musi-text::after {
+    color: #ff3b3b; /* Another glitch color */
+    left: -2px;
+    text-shadow: -1px 0 #6b6bff;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); }
+    10% { clip-path: polygon(0 15%, 100% 15%, 100% 20%, 0 20%); }
+    20% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+    30% { clip-path: polygon(0 30%, 100% 30%, 100% 35%, 0 35%); }
+    40% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); }
+    50% { clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); }
+    60% { clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%); }
+    70% { clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); }
+    80% { clip-path: polygon(0 40%, 100% 40%, 100% 45%, 0 45%); }
+    90% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); }
+    100% { clip-path: polygon(0 5%, 100% 5%, 100% 10%, 0 10%); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: polygon(0 75%, 100% 75%, 100% 80%, 0 80%); }
+    15% { clip-path: polygon(0 55%, 100% 55%, 100% 60%, 0 60%); }
+    30% { clip-path: polygon(0 40%, 100% 40%, 100% 45%, 0 45%); }
+    45% { clip-path: polygon(0 20%, 100% 20%, 100% 25%, 0 25%); }
+    60% { clip-path: polygon(0 10%, 100% 10%, 100% 15%, 0 15%); }
+    75% { clip-path: polygon(0 5%, 100% 5%, 100% 10%, 0 10%); }
+    90% { clip-path: polygon(0 90%, 100% 90%, 100% 95%, 0 95%); }
+    100% { clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); }
+}
+
+
+
+@keyframes premium-glow {
+    0% {
+        text-shadow: 
+            0 0 20px rgba(182, 107, 255, 0.6),
+            0 0 40px rgba(182, 107, 255, 0.4),
+            0 0 60px rgba(182, 107, 255, 0.2);
+    }
+    100% {
+        text-shadow: 
+            0 0 30px rgba(182, 107, 255, 0.8),
+            0 0 60px rgba(182, 107, 255, 0.6),
+            0 0 90px rgba(182, 107, 255, 0.4);
+    }
+}
+
 /* Glassmorphic Card */
 .glass-card {
     background: rgba(30, 30, 30, 0.5);
@@ -632,12 +754,12 @@ body {
     padding: 0;
     padding-top: 40px; /* Minimal padding to keep container close to navbar */
     box-sizing: border-box;
-    margin-top: -128px; /* Compensate for padding on main element */
+    margin-top: -100px; /* Compensate for padding on main element */
 }
 
 /* Glassmorphic Container */
 #pre-auth-content .glass-card {
-    background: rgba(20, 20, 25, 0.7);
+    background: radial-gradient(ellipse at center, rgba(182, 107, 255, 0.1) 0%, transparent 70%), rgba(20, 20, 25, 0.7);
     backdrop-filter: blur(20px) saturate(200%);
     -webkit-backdrop-filter: blur(20px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -772,76 +894,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Subtle floating animations */
-#pre-auth-content .glass-card {
-    animation: subtle-float 8s ease-in-out infinite;
-}
 
-/* Welcome content floating effect */
-#pre-auth-content .glass-card > div:first-child {
-    animation: welcome-float 10s ease-in-out infinite;
-    animation-delay: 0.5s;
-}
-
-/* Video container floating effect */
-#pre-auth-content .glass-card > div:last-child {
-    animation: video-float 12s ease-in-out infinite;
-    animation-delay: 1s;
-}
-
-@keyframes subtle-float {
-    0% { 
-        transform: translateY(0px) translateX(0px);
-    }
-    25% { 
-        transform: translateY(-8px) translateX(-4px);
-    }
-    50% { 
-        transform: translateY(-4px) translateX(0px);
-    }
-    75% { 
-        transform: translateY(-8px) translateX(4px);
-    }
-    100% { 
-        transform: translateY(0px) translateX(0px);
-    }
-}
-
-@keyframes welcome-float {
-    0% { 
-        transform: translateY(0px) translateX(0px);
-    }
-    25% { 
-        transform: translateY(-6px) translateX(-3px);
-    }
-    50% { 
-        transform: translateY(-3px) translateX(0px);
-    }
-    75% { 
-        transform: translateY(-6px) translateX(3px);
-    }
-    100% { 
-        transform: translateY(0px) translateX(0px);
-    }
-}
-
-@keyframes video-float {
-    0% { 
-        transform: translateY(0px) translateX(0px);
-    }
-    25% { 
-        transform: translateY(-5px) translateX(-2px);
-    }
-    50% { 
-        transform: translateY(-2px) translateX(0px);
-    }
-    75% { 
-        transform: translateY(-5px) translateX(2px);
-    }
-    100% { 
-        transform: translateY(0px) translateX(0px);
-    }
-}
 
 /* Video container organization */
 #pre-auth-content .glass-card {
